@@ -1,0 +1,6 @@
+version: v1.0.5 ✅
+
+- batasi nik dan kk pada inputan min/max 16 ✅
+- tambah edit dan hapus di setiap tabel ✅
+- ketika tambah data di daftar pengunjung otomatis data ada di pengusulan kis ✅
+- bahasa harus konsisten
