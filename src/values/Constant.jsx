@@ -3,15 +3,7 @@ function createData(no, nama, alamat, bantuan, nokk, nik, tanggal) {
 }
 
 export const dataDummy = [
-  createData(
-    1,
-    "Reski Arwah",
-    "Tanuntung",
-    "KIS",
-    "55555555",
-    "730205201199002",
-    "09/07/2022"
-  ),
+  createData(1, "Reski Arwah", "Tanuntung", "KIS", "55555555", "730205201199002", "09/07/2022"),
 ];
 
 export const constantKelengkapanBerkas = [
@@ -28,11 +20,13 @@ export const constantKelengkapanBerkas = [
 ];
 
 export const constantJenisLayanan = [
-  "Usulan KIS",
-  "SKTM",
-  "PKH",
-  "BPNT",
-  "Reaktivasi JKN",
+  "KK",
+  "KTP",
+  "Akta kelahiran",
+  "Surat keterangan pindah",
+  "Surat keterangan belum nikah",
+  "Surat keterangan ahli waris",
+  "Surat keterangan tidak mampu",
 ];
 
 export const constantBulan = [
@@ -52,29 +46,24 @@ export const constantBulan = [
 
 export const constantTahun = ["2022", "2023", "2024", "2025"];
 
-export const constantPisat = ["Peserta", "Suami", "Istri", "Anak", "Tambahan"];
+export const constantHubunganKeluarga = [
+  "Kepala Keluarga",
+  "Istri",
+  "Anak",
+  "Mertua",
+  "Famili lain",
+  "Cucu",
+];
 
 export const constantStatusKawin = ["TD", "Belum", "Kawin", "Cerai"];
 
-export const constantKecamatan = [
-  "Bejeng",
-  "Bajeng Barat",
-  "Barombong",
-  "Biringbulu",
-  "bontolempangan",
-  "Bontomarannu",
-  "Bontonompo",
-  "Bontonompo Selatan",
-  "Bungaya",
-  "Manuju",
-  "Pallangga",
-  "Parangloe",
-  "Parigi",
-  "Patalassang",
-  "Somba Opu",
-  "Tinggimoncong",
-  "Tompobulu",
-  "Tombolo Pao",
+export const constantLingkungan = [
+  "Baru",
+  "Tappe'e",
+  "Lappae",
+  "Kokoe",
+  "Talibunging",
+  "Larea-larea",
 ];
 
 export const constantKelurahan = [
@@ -94,14 +83,7 @@ export const constantKelurahan = [
     "Mata Allo",
     "Tubajeng",
   ],
-  [
-    "Bontomanai",
-    "Borimatangkasa",
-    "gentungang",
-    "Kalemandalle",
-    "Manjalling",
-    "Tanabangka",
-  ],
+  ["Bontomanai", "Borimatangkasa", "gentungang", "Kalemandalle", "Manjalling", "Tanabangka"],
   [
     "Biringala",
     "Kanjilo",
@@ -171,24 +153,8 @@ export const constantKelurahan = [
     "Tindang",
     "Bontoramba",
   ],
-  [
-    "Bissoloro",
-    "Bontomanai",
-    "Buakkang",
-    "Mangempang",
-    "Rannaloe",
-    "Jenebatu",
-    "Sapaya",
-  ],
-  [
-    "Bilalang",
-    "Manuju",
-    "Moncongloe",
-    "Pattallikang",
-    "Tamalatea",
-    "Tana Karaeng",
-    "Tassese",
-  ],
+  ["Bissoloro", "Bontomanai", "Buakkang", "Mangempang", "Rannaloe", "Jenebatu", "Sapaya"],
+  ["Bilalang", "Manuju", "Moncongloe", "Pattallikang", "Tamalatea", "Tana Karaeng", "Tassese"],
   [
     "Bontoala",
     "Bontoramba",
@@ -207,15 +173,7 @@ export const constantKelurahan = [
     "Parangbanoa",
     "Tetebatu",
   ],
-  [
-    "Belabori",
-    "Belapunranga",
-    "Bontokassi",
-    "Barisallo",
-    "Lonjoboko",
-    "Bontoparang",
-    "Lanna",
-  ],
+  ["Belabori", "Belapunranga", "Bontokassi", "Barisallo", "Lonjoboko", "Bontoparang", "Lanna"],
   ["Bilanrengi", "Jonjo", "Majannang", "Manimbahoi", "Sicini"],
   [
     "Borongpalala",
@@ -243,15 +201,7 @@ export const constantKelurahan = [
     "Tombolo",
     "Tompobalang",
   ],
-  [
-    "Parigi",
-    "Bonto Lerung",
-    "Bulutana",
-    "Gantarang",
-    "Garassing",
-    "Malino",
-    "Pattapang",
-  ],
+  ["Parigi", "Bonto Lerung", "Bulutana", "Gantarang", "Garassing", "Malino", "Pattapang"],
   [
     "Bontobuddung",
     "Datara",
@@ -287,12 +237,7 @@ export const constantSumberAirMinum = [
   "Air kemasan bermerk",
 ];
 
-export const constantDaya = [
-  "450 watt",
-  "900 watt",
-  "1300 watt",
-  ">= 2200 watt",
-];
+export const constantDaya = ["450 watt", "900 watt", "1300 watt", ">= 2200 watt"];
 
 export const kusioner = {
   Tabung: 2,

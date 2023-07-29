@@ -2,14 +2,11 @@ import { Stack } from "@mui/system";
 import {
   Box,
   Button,
-  Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   FormControl,
-  FormControlLabel,
-  FormGroup,
   FormHelperText,
   InputLabel,
   MenuItem,
@@ -23,11 +20,9 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import {
   constantBulan,
   constantJenisLayanan,
-  constantKelengkapanBerkas,
-  constantKelurahan,
+  constantLingkungan,
   constantTahun,
 } from "values/Constant";
-import { constantKecamatan } from "values/Constant";
 import "./style.scss";
 import ModalNotif from "component/modal/ModalNotif";
 import { DataGrid } from "@mui/x-data-grid";
@@ -38,16 +33,15 @@ const DaftarPengunjungPage = () => {
   const { open, variant, message } = value.notif;
 
   const columns = [
-    { field: "nik", headerName: "NIK", width: 150 },
-    { field: "no_kk", headerName: "NoKK", width: 150 },
+    { field: "nik", headerName: "NIK", width: 160 },
+    { field: "no_kk", headerName: "NoKK", width: 160 },
     { field: "nama", headerName: "Nama Pengunjung", width: 180 },
-    { field: "kecamatan", headerName: "Kecamatan", width: 200 },
-    { field: "kelurahan", headerName: "Kelurahan", width: 200 },
-    { field: "jenis_layanan", headerName: "Jenis Layanan", width: 150 },
-    { field: "no_telpon", headerName: "No telepon", width: 150 },
-    { field: "nama_petugas", headerName: "Nama Petugas", width: 150 },
+    { field: "jenis_layanan", headerName: "Jenis Layanan", width: 250 },
+    { field: "pekerjaan", headerName: "Pekerjaan", width: 150 },
+    { field: "pendidikan", headerName: "Pendidikan", width: 150 },
     { field: "tanggal_lahir", headerName: "Tanggal Lahir", width: 150 },
-    { field: "alamat", headerName: "Alamat", width: 150 },
+    { field: "alamat", headerName: "Alamat", width: 350 },
+    { field: "nama_petugas", headerName: "Nama Petugas", width: 150 },
     {
       field: "action",
       headerName: "Aksi",
@@ -62,34 +56,39 @@ const DaftarPengunjungPage = () => {
         const id = params.row.id;
         const row = params.row;
 
-        const newKel = {
-          kartu_keluarga: false,
-          ktp: false,
-          kks: false,
-          kis: false,
-          sktm_desa_kelurahan: false,
-          domisili: false,
-          foto_kondisi_rumah: false,
-        };
+        // let newKel = {
+        //   kartu_keluarga: false,
+        //   ktp: false,
+        //   kks: false,
+        //   kis: false,
+        //   sktm_desa_kelurahan: false,
+        //   domisili: false,
+        //   foto_kondisi_rumah: false,
+        // };
 
-        const split = row.kelengkapan_berkas.split(",");
+        // if (typeof row.kelengkapan_berkas === "string") {
+        //   const split = row.kelengkapan_berkas.split(",");
 
-        split.forEach((val) => {
-          newKel[val] = true;
-        });
+        //   split.forEach((val) => {
+        //     newKel[val] = true;
+        //   });
+        // } else {
+        //   newKel = row.kelengkapan_berkas;
+        // }
 
         const data = {
-          nama_petugas: row.nama_petugas,
-          nama: row.nama,
-          no_kk: row.no_kk,
           nik: row.nik,
-          kelurahan: row.kelurahan,
-          kecamatan: row.kecamatan,
-          alamat: row.alamat,
-          no_telpon: row.no_telpon,
+          no_kk: row.no_kk,
+          nama: row.nama,
           jenis_layanan: row.jenis_layanan,
-          kelengkapan_berkas: newKel,
+          pekerjaan: row.pekerjaan,
+          pendidikan: row.pendidikan,
           tanggal_lahir: row.tanggal_lahir,
+          lingkungan: row.lingkungan,
+          jalan: row.jalan,
+          rw: row.rw,
+          rt: row.rt,
+          nama_petugas: row.nama_petugas,
           id: row.id,
           bulan: row.bulan,
           tahun: row.tahun,
@@ -106,40 +105,25 @@ const DaftarPengunjungPage = () => {
         );
       },
     },
-    // {
-    //   field: "action",
-    //   headerName: "Action",
-    //   width: 120,
-    //   renderCell: renderDetailsButton,
-    //   disableClickEventBubbling: true,
-    // },
-    // {
-    //   field: "fullName",
-    //   headerName: "Full name",
-    //   description: "This column has a value getter and is not sortable.",
-    //   sortable: false,
-    //   width: 160,
-    //   valueGetter: (params) =>
-    //     `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-    // },
   ];
 
   return (
     <>
       <Typography variant="h5">Daftar Pengunjung</Typography>
 
-      <Stack sx={{ mb: 4, mt: 4 }} direction="horizontal">
+      <Stack sx={{ mb: 4, mt: 4 }} direction="row">
         <FormControl sx={{ mr: 2, minWidth: 150 }}>
-          <InputLabel id="filter_kecamatan">Kecamatan</InputLabel>
+          <InputLabel id="filter_lingkungan">Lingkungan</InputLabel>
           <Select
-            name="filter_kecamatan"
-            labelId="filter_kecamatan"
-            label="Kecamatan"
+            name="filter_lingkungan"
+            labelId="filter_lingkungan"
+            label="Lingkungan"
             onChange={func.onChangeFilter}
+            defaultValue=""
           >
-            {constantKecamatan.map((kec, i) => (
-              <MenuItem key={i} value={kec}>
-                {kec}
+            {constantLingkungan.map((e, i) => (
+              <MenuItem key={i} value={e}>
+                {e}
               </MenuItem>
             ))}
           </Select>
@@ -151,6 +135,7 @@ const DaftarPengunjungPage = () => {
             labelId="filter_jenis_layanan"
             label="Jenis layanan"
             onChange={func.onChangeFilter}
+            defaultValue=""
           >
             {constantJenisLayanan.map((value, i) => (
               <MenuItem key={i} value={value}>
@@ -166,6 +151,7 @@ const DaftarPengunjungPage = () => {
             labelId="filter_bulan"
             label="Bulan"
             onChange={func.onChangeFilter}
+            defaultValue=""
           >
             {constantBulan.map((value, i) => (
               <MenuItem key={i} value={value}>
@@ -181,6 +167,7 @@ const DaftarPengunjungPage = () => {
             labelId="filter_tahun"
             label="Tahun"
             onChange={func.onChangeFilter}
+            defaultValue=""
           >
             {constantTahun.map((value, i) => (
               <MenuItem key={i} value={value}>
@@ -252,7 +239,7 @@ const ShowData = ({ value, columns }) => (
 );
 
 const TambahData = ({ func, value }) => {
-  const { input, open, indexKecamatan } = value;
+  const { input, open } = value;
   const {
     onError,
     onHelperText,
@@ -264,17 +251,18 @@ const TambahData = ({ func, value }) => {
     onUbahDb,
   } = func;
   const {
-    nama_petugas,
-    nama,
-    no_kk,
     nik,
-    kelurahan,
-    kecamatan,
-    alamat,
-    no_telpon,
+    no_kk,
+    nama,
     jenis_layanan,
-    kelengkapan_berkas,
+    pekerjaan,
+    pendidikan,
     tanggal_lahir,
+    lingkungan,
+    jalan,
+    rw,
+    rt,
+    nama_petugas,
   } = input;
   return (
     <Dialog open={open} onClose={handleClose} className="custom-dialog-tambah-data">
@@ -293,15 +281,27 @@ const TambahData = ({ func, value }) => {
           }}
         >
           <TextField
-            name="nama_petugas"
-            label="Nama Petugas"
-            type="text"
+            name="nik"
+            label="NIK"
+            type="number"
             variant="outlined"
             onChange={(e) => onChange(e, 0, "input")}
             required
-            value={nama_petugas}
-            // error={onError(nama_petugas)}
-            // helperText={onHelperText(nama_petugas)}
+            value={nik}
+            error={onError(nik, "nik")}
+            helperText={onHelperText(nik, "nik")}
+          />
+
+          <TextField
+            name="no_kk"
+            label="No.KK"
+            type="number"
+            variant="outlined"
+            onChange={(e) => onChange(e, 1, "input")}
+            required
+            value={no_kk}
+            error={onError(no_kk, "no_kk")}
+            helperText={onHelperText(no_kk, "no_kk")}
           />
 
           <TextField
@@ -309,12 +309,58 @@ const TambahData = ({ func, value }) => {
             label="Nama pengunjung"
             type="text"
             variant="outlined"
-            onChange={(e) => onChange(e, 1, "input")}
+            onChange={(e) => onChange(e, 2, "input")}
             required
             value={nama}
             error={onError(nama)}
             helperText={onHelperText(nama)}
           />
+
+          <FormControl className="custom-select" fullWidth>
+            <InputLabel>Jenis layanan</InputLabel>
+            <Select
+              name="jenis_layanan"
+              label="Jenis layanan"
+              onChange={(e) => onChange(e, 3, "input")}
+              required
+              value={jenis_layanan}
+              error={onError(jenis_layanan)}
+            >
+              {constantJenisLayanan.map((value, i) => (
+                <MenuItem key={i} value={value}>
+                  {value}
+                </MenuItem>
+              ))}
+            </Select>
+            {onHelperText(jenis_layanan) ? (
+              <FormHelperText sx={{ color: "red" }}>Form harus di isi</FormHelperText>
+            ) : null}
+          </FormControl>
+
+          <TextField
+            name="pekerjaan"
+            label="Pekerjaan"
+            type="text"
+            variant="outlined"
+            onChange={(e) => onChange(e, 4, "input")}
+            required
+            value={pekerjaan}
+            error={onError(pekerjaan)}
+            helperText={onHelperText(pekerjaan)}
+          />
+
+          <TextField
+            name="pendidikan"
+            label="Pendidikan terakhir"
+            type="text"
+            variant="outlined"
+            onChange={(e) => onChange(e, 5, "input")}
+            required
+            value={pendidikan}
+            error={onError(pendidikan)}
+            helperText={onHelperText(pendidikan)}
+          />
+
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <DatePicker
               label="Tanggal lahir"
@@ -329,169 +375,78 @@ const TambahData = ({ func, value }) => {
               )}
             />
           </LocalizationProvider>
-          <TextField
-            name="no_kk"
-            label="No.KK"
-            type="number"
-            variant="outlined"
-            onChange={(e) => onChange(e, 2, "input")}
-            required
-            value={no_kk}
-            error={onError(no_kk, "no_kk")}
-            helperText={onHelperText(no_kk, "no_kk")}
-          />
-
-          <TextField
-            name="nik"
-            label="NIK"
-            type="number"
-            variant="outlined"
-            onChange={(e) => onChange(e, 3, "input")}
-            required
-            value={nik}
-            error={onError(nik, "nik")}
-            helperText={onHelperText(nik, "nik")}
-          />
-          <Stack className="custom-stack-kecamatan-kelurahan">
-            <FormControl sx={{ ml: 1, minWidth: 200 }}>
-              <InputLabel id="demo-simple-select-label">Kecamatan</InputLabel>
-              <Select
-                name="kecamatan"
-                label="Kecamatan"
-                onChange={(e) => onChange(e, 4, "input")}
-                required
-                value={kecamatan}
-                error={onError(kecamatan)}
-              >
-                {constantKecamatan.map((kec) => (
-                  <MenuItem value={kec}>{kec}</MenuItem>
-                ))}
-              </Select>
-              {onHelperText(kecamatan) ? (
-                <FormHelperText sx={{ color: "red" }}>Form harus di isi</FormHelperText>
-              ) : null}
-            </FormControl>
-            <FormControl sx={{ mr: 1, minWidth: 200 }}>
-              <InputLabel id="demo-simple-select-label">Kelurahan</InputLabel>
-              <Select
-                name="kelurahan"
-                label="Kelurahan"
-                onChange={(e) => onChange(e, 5, "input")}
-                required
-                value={kelurahan}
-                error={onError(kelurahan)}
-                disabled={indexKecamatan !== null ? false : true}
-              >
-                {indexKecamatan !== null
-                  ? constantKelurahan !== undefined
-                    ? constantKelurahan[indexKecamatan].map((kel) => (
-                        <MenuItem value={kel}>{kel}</MenuItem>
-                      ))
-                    : null
-                  : null}
-              </Select>
-              {onHelperText(kelurahan) ? (
-                <FormHelperText sx={{ color: "red" }}>Form harus di isi</FormHelperText>
-              ) : null}
-            </FormControl>
-          </Stack>
-
-          <TextField
-            name="alamat"
-            label="Alamat tempat tinggal"
-            type="text"
-            variant="outlined"
-            onChange={(e) => onChange(e, 6, "input")}
-            required
-            value={alamat}
-            error={onError(alamat)}
-            helperText={onHelperText(alamat)}
-          />
-
-          <TextField
-            name="no_telpon"
-            label="Nomor Telepon"
-            type="number"
-            variant="outlined"
-            onChange={(e) => onChange(e, 7, "input")}
-            required
-            value={no_telpon}
-            error={onError(no_telpon)}
-            helperText={onHelperText(no_telpon)}
-          />
 
           <FormControl className="custom-select" fullWidth>
-            <InputLabel>Jenis layanan</InputLabel>
+            <InputLabel>Lingkungan</InputLabel>
             <Select
-              name="jenis_layanan"
-              label="Jenis layanan"
-              onChange={(e) => onChange(e, 8, "input")}
+              name="lingkungan"
+              label="Lingkungan"
+              defaultValue=""
+              onChange={(e) => onChange(e, 7, "input")}
               required
-              value={jenis_layanan}
-              error={onError(jenis_layanan)}
+              value={lingkungan}
+              error={onError(lingkungan)}
             >
-              {constantJenisLayanan.map((value) => (
-                <MenuItem value={value}>{value}</MenuItem>
+              {constantLingkungan.map((value, i) => (
+                <MenuItem key={i} value={value}>
+                  {value}
+                </MenuItem>
               ))}
             </Select>
-            {onHelperText(jenis_layanan) ? (
+            {onHelperText(lingkungan) ? (
               <FormHelperText sx={{ color: "red" }}>Form harus di isi</FormHelperText>
             ) : null}
           </FormControl>
 
-          <Typography
-            sx={{
-              mt: 3,
-              ml: 2,
-              fontWeight: 600,
-            }}
-          >
-            Kelengkapan berkas
-          </Typography>
+          <TextField
+            name="jalan"
+            label="Nama jalan"
+            type="text"
+            variant="outlined"
+            onChange={(e) => onChange(e, 8, "input")}
+            required
+            value={jalan}
+            error={onError(jalan)}
+            helperText={onHelperText(jalan)}
+          />
 
-          <Stack
-            className="custom-stack-kelengkapan-berkas"
-            direction="horizontal"
-            justifyContent="space-between"
-          >
-            <FormControl component="fieldset" variant="standard">
-              <FormGroup>
-                {constantKelengkapanBerkas[0].map((value) => {
-                  return (
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={kelengkapan_berkas[value.name]}
-                          onChange={(e) => onChange(e, 9, "checkbox")}
-                          name={value.name}
-                        />
-                      }
-                      label={value.label}
-                    />
-                  );
-                })}
-              </FormGroup>
-            </FormControl>
+          <Stack className="custom-stack">
+            <TextField
+              name="rw"
+              label="RW"
+              type="number"
+              variant="outlined"
+              onChange={(e) => onChange(e, 9, "input")}
+              required
+              value={rw}
+              error={onError(rw)}
+              helperText={onHelperText(rw)}
+            />
 
-            <FormControl component="fieldset" variant="standard">
-              <FormGroup>
-                {constantKelengkapanBerkas[1].map((value) => {
-                  return (
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={kelengkapan_berkas[value.name]}
-                          onChange={(e) => onChange(e, 9, "checkbox")}
-                          name={value.name}
-                        />
-                      }
-                      label={value.label}
-                    />
-                  );
-                })}
-              </FormGroup>
-            </FormControl>
+            <TextField
+              name="rt"
+              label="RT"
+              type="number"
+              variant="outlined"
+              onChange={(e) => onChange(e, 10, "input")}
+              required
+              value={rt}
+              error={onError(rt)}
+              helperText={onHelperText(rt)}
+            />
           </Stack>
+
+          <TextField
+            name="nama_petugas"
+            label="Nama Petugas"
+            type="text"
+            variant="outlined"
+            onChange={(e) => onChange(e, 11, "input")}
+            required
+            value={nama_petugas}
+            error={onError(nama_petugas)}
+            helperText={onHelperText(nama_petugas)}
+          />
         </Box>
       </DialogContent>
       <DialogActions

@@ -22,9 +22,10 @@ import {
   constantJenisKelamin,
   constantKecamatan,
   constantKelurahan,
-  constantPisat,
+  constantHubunganKeluarga,
   constantStatusKawin,
   constantTahun,
+  constantLingkungan,
 } from "values/Constant";
 import "./style.scss";
 import ModalNotif from "component/modal/ModalNotif";
@@ -36,25 +37,21 @@ const DataMasyarakatPage = () => {
   const { open, variant, message } = value.notif;
 
   const columns = [
-    { field: "nik", headerName: "NIK", width: 150 },
-    { field: "no_kk", headerName: "NoKK", width: 150 },
+    { field: "nik", headerName: "NIK", width: 160 },
+    { field: "no_kk", headerName: "NoKK", width: 160 },
     { field: "nama", headerName: "Nama Lengkap", width: 180 },
-    { field: "kecamatan", headerName: "Kecamatan", width: 200 },
-    { field: "kelurahan", headerName: "Kelurahan", width: 200 },
-    { field: "pisat", headerName: "PISAT", width: 150 },
+    { field: "jenis_kelamin", headerName: "Jenis Kelamin", width: 150 },
     { field: "tempat_lahir", headerName: "Tempat Lahir", width: 150 },
     { field: "tanggal_lahir", headerName: "Tanggal Lahir", width: 150 },
-    { field: "jenis_kelamin", headerName: "Jenis Kelamin", width: 150 },
-    { field: "status_kawin", headerName: "Status Kawin", width: 150 },
+    { field: "hubungan_keluarga", headerName: "Hubungan Keluarga", width: 150 },
+    { field: "pekerjaan", headerName: "Pekerjaan", width: 150 },
+    { field: "pendidikan", headerName: "Pendidikan terakhir", width: 150 },
     {
       field: "alamat",
       headerName: "Alamat Tempat Tinggal",
-      width: 150,
+      width: 350,
     },
-    { field: "kode_pos", headerName: "Kode Pos", width: 150 },
-    { field: "rw", headerName: "RW", width: 150 },
-    { field: "rt", headerName: "RT", width: 150 },
-    { field: "no_telpon", headerName: "Nomor Telepon", width: 150 },
+    { field: "status_kawin", headerName: "Status Kawin", width: 150 },
     {
       field: "action",
       headerName: "Action",
@@ -73,18 +70,18 @@ const DataMasyarakatPage = () => {
           no_kk: row.no_kk,
           nik: row.nik,
           nama: row.nama,
-          pisat: row.pisat,
+          jenis_kelamin: row.jenis_kelamin,
           tempat_lahir: row.tempat_lahir,
           tanggal_lahir: row.tanggal_lahir,
-          jenis_kelamin: row.jenis_kelamin,
-          status_kawin: row.status_kawin,
+          hubungan_keluarga: row.hubungan_keluarga,
+          pekerjaan: row.pekerjaan,
+          pendidikan: row.pendidikan,
           alamat: row.alamat,
+          lingkungan: row.lingkungan,
+          jalan: row.jalan,
           rw: row.rw,
           rt: row.rt,
-          kode_pos: row.kode_pos,
-          kecamatan: row.kecamatan,
-          kelurahan: row.kelurahan,
-          no_telpon: row.no_telpon,
+          status_kawin: row.status_kawin,
           id: row.id,
           bulan: row.bulan,
           tahun: row.tahun,
@@ -110,17 +107,20 @@ const DataMasyarakatPage = () => {
         Data Masyarakat
       </Typography>
 
-      <Stack sx={{ mb: 4, mt: 4 }} direction="horizontal">
+      <Stack sx={{ mb: 4, mt: 4 }} direction="row">
         <FormControl sx={{ mr: 2, minWidth: 150 }}>
-          <InputLabel id="filter_kecamatan">Kecamatan</InputLabel>
+          <InputLabel id="filter_kecamatan">Lingkungan</InputLabel>
           <Select
-            name="filter_kecamatan"
-            labelId="filter_kecamatan"
-            label="Kecamatan"
+            name="filter_lingkungan"
+            labelId="filter_lingkungan"
+            label="lingkungan"
+            defaultValue=""
             onChange={func.onChangeFilter}
           >
-            {constantKecamatan.map((kec) => (
-              <MenuItem value={kec}>{kec}</MenuItem>
+            {constantLingkungan.map((e, i) => (
+              <MenuItem key={i} value={e}>
+                {e}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -131,10 +131,13 @@ const DataMasyarakatPage = () => {
             name="filter_bulan"
             labelId="filter_bulan"
             label="Bulan"
+            defaultValue=""
             onChange={func.onChangeFilter}
           >
-            {constantBulan.map((value) => (
-              <MenuItem value={value}>{value}</MenuItem>
+            {constantBulan.map((value, i) => (
+              <MenuItem key={i} value={value}>
+                {value}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -145,10 +148,13 @@ const DataMasyarakatPage = () => {
             name="filter_tahun"
             labelId="filter_tahun"
             label="Tahun"
+            defaultValue=""
             onChange={func.onChangeFilter}
           >
-            {constantTahun.map((value) => (
-              <MenuItem value={value}>{value}</MenuItem>
+            {constantTahun.map((value, i) => (
+              <MenuItem key={i} value={value}>
+                {value}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -213,7 +219,7 @@ const ShowData = ({ value, columns }) => (
 );
 
 const TambahData = ({ value, func }) => {
-  const { input, open, indexKecamatan } = value;
+  const { input, open } = value;
   const {
     onError,
     onHelperText,
@@ -228,18 +234,19 @@ const TambahData = ({ value, func }) => {
     no_kk,
     nik,
     nama,
-    pisat,
     tempat_lahir,
-    tanggal_lahir,
     jenis_kelamin,
-    status_kawin,
-    alamat,
+    tanggal_lahir,
+    hubungan_keluarga,
+    pekerjaan,
+    pendidikan,
+    lingkungan,
+    jalan,
     rw,
     rt,
-    kode_pos,
-    kecamatan,
-    kelurahan,
-    no_telpon,
+    status_kawin,
+    nama_ayah,
+    nama_ibu,
   } = input;
   return (
     <Dialog className="custom-dialog-tambah-data" open={open} onClose={handleClose}>
@@ -293,20 +300,23 @@ const TambahData = ({ value, func }) => {
           />
 
           <FormControl className="custom-select" fullWidth>
-            <InputLabel>PISAT</InputLabel>
+            <InputLabel>Jenis Kelamin</InputLabel>
             <Select
-              name="pisat"
-              label="PISAT"
+              name="jenis_kelamin"
+              label="Jenis Kelamin"
+              defaultValue=""
               onChange={(e) => onChange(e, 3, "input")}
               required
-              value={pisat}
-              error={onError(pisat)}
+              value={jenis_kelamin}
+              error={onError(jenis_kelamin)}
             >
-              {constantPisat.map((value) => (
-                <MenuItem value={value}>{value}</MenuItem>
+              {constantJenisKelamin.map((data, i) => (
+                <MenuItem key={i} value={data}>
+                  {data}
+                </MenuItem>
               ))}
             </Select>
-            {onHelperText(pisat) ? (
+            {onHelperText(jenis_kelamin) ? (
               <FormHelperText sx={{ color: "red" }}>Form harus di isi</FormHelperText>
             ) : null}
           </FormControl>
@@ -339,53 +349,83 @@ const TambahData = ({ value, func }) => {
           </LocalizationProvider>
 
           <FormControl className="custom-select" fullWidth>
-            <InputLabel>Jenis Kelamin</InputLabel>
+            <InputLabel>Hubungan Keluarga</InputLabel>
             <Select
-              name="jenis_kelamin"
-              label="Jenis Kelamin"
+              name="hubungan_keluarga"
+              label="Hubungan Keluarga"
+              defaultValue=""
               onChange={(e) => onChange(e, 6, "input")}
               required
-              value={jenis_kelamin}
-              error={onError(jenis_kelamin)}
+              value={hubungan_keluarga}
+              error={onError(hubungan_keluarga)}
             >
-              {constantJenisKelamin.map((data) => (
-                <MenuItem value={data}>{data}</MenuItem>
+              {constantHubunganKeluarga.map((value, i) => (
+                <MenuItem key={i} value={value}>
+                  {value}
+                </MenuItem>
               ))}
             </Select>
-            {onHelperText(pisat) ? (
-              <FormHelperText sx={{ color: "red" }}>Form harus di isi</FormHelperText>
-            ) : null}
-          </FormControl>
-
-          <FormControl className="custom-select" fullWidth>
-            <InputLabel>Status Kawin</InputLabel>
-            <Select
-              name="status_kawin"
-              label="Status Kawin"
-              onChange={(e) => onChange(e, 7, "input")}
-              required
-              value={status_kawin}
-              error={onError(status_kawin)}
-            >
-              {constantStatusKawin.map((data) => (
-                <MenuItem value={data}>{data}</MenuItem>
-              ))}
-            </Select>
-            {onHelperText(status_kawin) ? (
+            {onHelperText(hubungan_keluarga) ? (
               <FormHelperText sx={{ color: "red" }}>Form harus di isi</FormHelperText>
             ) : null}
           </FormControl>
 
           <TextField
-            name="alamat"
-            label="Alamat tempat tinggal"
+            name="pekerjaan"
+            label="Pekerjaan"
+            type="text"
+            variant="outlined"
+            onChange={(e) => onChange(e, 7, "input")}
+            required
+            value={pekerjaan}
+            error={onError(pekerjaan)}
+            helperText={onHelperText(pekerjaan)}
+          />
+
+          <TextField
+            name="pendidikan"
+            label="Pendidikan"
             type="text"
             variant="outlined"
             onChange={(e) => onChange(e, 8, "input")}
             required
-            value={alamat}
-            error={onError(alamat)}
-            helperText={onHelperText(alamat)}
+            value={pendidikan}
+            error={onError(pendidikan)}
+            helperText={onHelperText(pendidikan)}
+          />
+
+          <FormControl className="custom-select" fullWidth>
+            <InputLabel>Lingkungan</InputLabel>
+            <Select
+              name="lingkungan"
+              label="Lingkungan"
+              defaultValue=""
+              onChange={(e) => onChange(e, 9, "input")}
+              required
+              value={lingkungan}
+              error={onError(lingkungan)}
+            >
+              {constantLingkungan.map((value, i) => (
+                <MenuItem key={i} value={value}>
+                  {value}
+                </MenuItem>
+              ))}
+            </Select>
+            {onHelperText(lingkungan) ? (
+              <FormHelperText sx={{ color: "red" }}>Form harus di isi</FormHelperText>
+            ) : null}
+          </FormControl>
+
+          <TextField
+            name="jalan"
+            label="Nama jalan"
+            type="text"
+            variant="outlined"
+            onChange={(e) => onChange(e, 10, "input")}
+            required
+            value={jalan}
+            error={onError(jalan)}
+            helperText={onHelperText(jalan)}
           />
 
           <Stack className="custom-stack">
@@ -394,7 +434,7 @@ const TambahData = ({ value, func }) => {
               label="RW"
               type="number"
               variant="outlined"
-              onChange={(e) => onChange(e, 9, "input")}
+              onChange={(e) => onChange(e, 11, "input")}
               required
               value={rw}
               error={onError(rw)}
@@ -406,7 +446,7 @@ const TambahData = ({ value, func }) => {
               label="RT"
               type="number"
               variant="outlined"
-              onChange={(e) => onChange(e, 10, "input")}
+              onChange={(e) => onChange(e, 12, "input")}
               required
               value={rt}
               error={onError(rt)}
@@ -414,72 +454,50 @@ const TambahData = ({ value, func }) => {
             />
           </Stack>
 
-          <TextField
-            name="kode_pos"
-            label="Kode pos"
-            type="number"
-            variant="outlined"
-            onChange={(e) => onChange(e, 11, "input")}
-            required
-            value={kode_pos}
-            error={onError(kode_pos)}
-            helperText={onHelperText(kode_pos)}
-          />
-
-          <Stack className="custom-stack">
-            <FormControl sx={{ ml: 1, minWidth: 200 }}>
-              <InputLabel>Kecamatan</InputLabel>
-              <Select
-                name="kecamatan"
-                label="Kecamatan"
-                onChange={(e) => onChange(e, 12, "input")}
-                required
-                value={kecamatan}
-                error={onError(kecamatan)}
-              >
-                {constantKecamatan.map((kec) => (
-                  <MenuItem value={kec}>{kec}</MenuItem>
-                ))}
-              </Select>
-              {onHelperText(kecamatan) ? (
-                <FormHelperText sx={{ color: "red" }}>Form harus di isi</FormHelperText>
-              ) : null}
-            </FormControl>
-            <FormControl sx={{ mr: 1, minWidth: 200 }}>
-              <InputLabel id="demo-simple-select-label">Kelurahan</InputLabel>
-              <Select
-                name="kelurahan"
-                label="Kelurahan"
-                onChange={(e) => onChange(e, 13, "input")}
-                required
-                value={kelurahan}
-                error={onError(kelurahan)}
-                disabled={indexKecamatan !== null ? false : true}
-              >
-                {indexKecamatan !== null
-                  ? constantKelurahan !== undefined
-                    ? constantKelurahan[indexKecamatan].map((kel) => (
-                        <MenuItem value={kel}>{kel}</MenuItem>
-                      ))
-                    : null
-                  : null}
-              </Select>
-              {onHelperText(kelurahan) ? (
-                <FormHelperText sx={{ color: "red" }}>Form harus di isi</FormHelperText>
-              ) : null}
-            </FormControl>
-          </Stack>
+          <FormControl className="custom-select" fullWidth>
+            <InputLabel>Status Kawin</InputLabel>
+            <Select
+              name="status_kawin"
+              label="Status Kawin"
+              defaultValue=""
+              onChange={(e) => onChange(e, 13, "input")}
+              required
+              value={status_kawin}
+              error={onError(status_kawin)}
+            >
+              {constantStatusKawin.map((data, i) => (
+                <MenuItem key={i} value={data}>
+                  {data}
+                </MenuItem>
+              ))}
+            </Select>
+            {onHelperText(status_kawin) ? (
+              <FormHelperText sx={{ color: "red" }}>Form harus di isi</FormHelperText>
+            ) : null}
+          </FormControl>
 
           <TextField
-            name="no_telpon"
-            label="Nomor Telepon"
-            type="number"
+            name="nama_ayah"
+            label="Nama ayah"
+            type="text"
             variant="outlined"
             onChange={(e) => onChange(e, 14, "input")}
             required
-            value={no_telpon}
-            error={onError(no_telpon)}
-            helperText={onHelperText(no_telpon)}
+            value={nama_ayah}
+            error={onError(nama_ayah)}
+            helperText={onHelperText(nama_ayah)}
+          />
+
+          <TextField
+            name="nama_ibu"
+            label="Nama ibu"
+            type="text"
+            variant="outlined"
+            onChange={(e) => onChange(e, 15, "input")}
+            required
+            value={nama_ibu}
+            error={onError(nama_ibu)}
+            helperText={onHelperText(nama_ibu)}
           />
         </Box>
       </DialogContent>

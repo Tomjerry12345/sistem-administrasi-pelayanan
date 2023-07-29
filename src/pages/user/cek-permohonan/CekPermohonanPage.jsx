@@ -25,9 +25,9 @@ const CekPermohonanPage = () => {
         sx={{ mb: 4, mt: 4 }}
       >
         <Stack display="flex" direction="column" alignItems="center">
-          <Button variant="outlined" onClick={func.onClickUpload}>
+          {/* <Button variant="outlined" onClick={func.onClickUpload}>
             Unggah Excell
-          </Button>
+          </Button> */}
           <input
             type="file"
             ref={value.inputUpload}

@@ -47,23 +47,27 @@ const Logic = () => {
         variant: "progress",
       });
 
-      const getUser = await getData("user");
-      getUser.forEach((doc) => {
-        const data = doc.data();
+      try {
+        const getUser = await getData("user");
+        getUser.forEach((doc) => {
+          const data = doc.data();
 
-        if (input.username === data.username && input.password === data.password) {
-          localStorage.setItem("auth", "user");
-          localStorage.setItem("move-page", "null");
-          localStorage.setItem("index-menu", "null");
-          navigate("/user");
-        }
-      });
-
-      setNotif({
-        open: true,
-        message: "Username atau password salah",
-        variant: "error",
-      });
+          if (input.username === data.username && input.password === data.password) {
+            localStorage.setItem("auth", "user");
+            localStorage.setItem("move-page", "null");
+            localStorage.setItem("index-menu", "null");
+            navigate("/user");
+          } else {
+            throw new Error("Username atau password salah");
+          }
+        });
+      } catch (e) {
+        setNotif({
+          open: true,
+          message: e.toString(),
+          variant: "error",
+        });
+      }
     }
   };
 

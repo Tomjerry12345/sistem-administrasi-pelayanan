@@ -12,16 +12,16 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { logS } from "../values/Utilitas";
+import { log, logS } from "../values/Utilitas";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBeJzcuuKKcu1HXNFA2ri5Rk6ICAfH0GgI",
-  authDomain: "salkpm-12bf3.firebaseapp.com",
-  projectId: "salkpm-12bf3",
-  storageBucket: "salkpm-12bf3.appspot.com",
-  messagingSenderId: "993620155324",
-  appId: "1:993620155324:web:caae9ab548c21a6c34a9b9",
-  measurementId: "G-6NWGWMLQFE",
+  apiKey: "AIzaSyD3k2CQcdMWRZ1681bCejcOpY8hTWcWumQ",
+  authDomain: "sistem-pelayanan.firebaseapp.com",
+  projectId: "sistem-pelayanan",
+  storageBucket: "sistem-pelayanan.appspot.com",
+  messagingSenderId: "723332462456",
+  appId: "1:723332462456:web:e9b97768620d1c7c823a8d",
+  measurementId: "G-JGDNZSPHJS",
 };
 
 const FirebaseConfig = () => {
@@ -102,27 +102,32 @@ const FirebaseConfig = () => {
 
     const listWhere = [];
 
-    if (value !== "") {
-      listWhere.push(where(key, "==", parseInt(value)));
+    if (value !== "" && value !== undefined) {
+      log({ key });
+      log({ value });
+      listWhere.push(where(key, "==", value));
     }
 
-    if (value1 !== "") {
+    if (value1 !== "" && value1 !== undefined) {
       listWhere.push(where(key1, "==", value1));
     }
 
-    if (value2 !== "") {
+    if (value2 !== "" && value2 !== undefined) {
       listWhere.push(where(key2, "==", value2));
     }
 
-    if (value3 !== "") {
+    if (value3 !== "" && value3 !== undefined) {
       listWhere.push(where(key3, "==", value3));
     }
 
-    if (value4 !== "") {
+    if (value4 !== "" && value4 !== undefined) {
+      alert("value4");
       listWhere.push(where(key4, "==", value4));
     }
 
     const sum = listWhere.length;
+
+    log({ listWhere });
 
     let q;
 

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FirebaseConfig from "config/FirebaseConfig";
-import { constantKecamatan } from "values/Constant";
 import InputValidator from "values/InputValidator";
 import { getMonthNow, getYearNow } from "values/Utilitas";
 import * as XLSX from "xlsx";
@@ -14,35 +13,33 @@ const Logic = () => {
     no_kk: "",
     nik: "",
     nama: "",
-    pisat: "",
+    jenis_kelamin: "",
     tempat_lahir: "",
     tanggal_lahir: "",
-    jenis_kelamin: "",
-    status_kawin: "",
-    alamat: "",
+    hubungan_keluarga: "",
+    pekerjaan: "",
+    pendidikan: "",
+    lingkungan: "",
+    jalan: "",
     rw: "",
     rt: "",
-    kode_pos: "",
-    kecamatan: "",
-    kelurahan: "",
-    no_telpon: "",
+    status_kawin: "",
+    nama_ayah: "",
+    nama_ibu: "",
     tahun: getYearNow(),
     bulan: getMonthNow(),
   });
 
   const [inputFilter, setInputFilter] = useState({
-    filter_kecamatan: "",
-    filter_jenis_layanan: "",
-    filter_nik_kk: "",
+    filter_lingkungan: "",
     filter_bulan: "",
     filter_tahun: "",
+    filter_nik_kk: "",
   });
 
   const [data, setData] = useState([]);
 
   const [click, setClick] = useState(false);
-
-  const [indexKecamatan, setIndexKecamatan] = useState(null);
 
   const [notif, setNotif] = useState({
     open: false,
@@ -68,27 +65,23 @@ const Logic = () => {
   const COLLECTION = "data-masyarakat";
 
   useEffect(() => {
-    getAllData();
-  }, []);
-
-  useEffect(() => {
-    const { filter_nik_kk, filter_kecamatan, filter_bulan, filter_tahun } = inputFilter;
+    const { filter_lingkungan, filter_bulan, filter_tahun, filter_nik_kk } = inputFilter;
 
     if (
-      filter_tahun !== "" ||
+      filter_lingkungan !== "" ||
       filter_bulan !== "" ||
-      filter_nik_kk.length !== "" ||
-      filter_kecamatan !== ""
+      filter_tahun !== "" ||
+      filter_nik_kk !== ""
     ) {
       getAllDataFilter(
-        "tahun",
-        filter_tahun,
+        "lingkungan",
+        filter_lingkungan,
         "bulan",
         filter_bulan,
+        "tahun",
+        filter_tahun,
         "nik",
-        filter_nik_kk,
-        "kecamatan",
-        filter_kecamatan
+        filter_nik_kk
       );
     } else {
       getAllData();
@@ -120,9 +113,7 @@ const Logic = () => {
       key2,
       value2,
       key3,
-      value3,
-      "",
-      ""
+      value3
     );
 
     let listData = [];
@@ -144,37 +135,34 @@ const Logic = () => {
       setInput({
         no_kk: "",
         nik: "",
-        nama_lengkap: "",
-        pisat: "",
+        nama: "",
         tempat_lahir: "",
-        tanggal_lahir: "",
         jenis_kelamin: "",
-        status_kawin: "",
-        alamat: "",
+        tanggal_lahir: "",
+        hubungan_keluarga: "",
+        pekerjaan: "",
+        pendidikan: "",
+        lingkungan: "",
+        jalan: "",
         rw: "",
         rt: "",
-        kode_pos: "",
-        kecamatan: "",
-        kelurahan: "",
-        no_telpon: "",
+        status_kawin: "",
+        nama_ayah: "",
+        nama_ibu: "",
         tahun: getYearNow(),
         bulan: getMonthNow(),
       });
     }
 
     setOpen(false);
+    setClick(false);
   };
 
   const onChange = (event, index, variant) => {
-    const { name, value, checked } = event.target;
+    const { name, value } = event.target;
 
     if (variant === "input") {
       validator.updateValid(value, index, name);
-
-      if (name === "kecamatan") {
-        let index = constantKecamatan.indexOf(value);
-        setIndexKecamatan(index);
-      }
 
       if (name === "no_kk" || name === "nik") {
         if (value.length <= 16) {
@@ -189,15 +177,6 @@ const Logic = () => {
           [name]: value,
         });
       }
-    } else if (variant === "checkbox") {
-      validator.updateValid("true", index);
-      setInput({
-        ...input,
-        kelengkapan_berkas: {
-          ...input.kelengkapan_berkas,
-          [name]: checked,
-        },
-      });
     }
   };
 
@@ -222,7 +201,12 @@ const Logic = () => {
         message: "Sedang di proses...",
         variant: "progress",
       });
-      const res = await addData(COLLECTION, input);
+
+      let cInput = {
+        ...input,
+        alamat: `${input.jalan} RT ${input.rt} RW ${input.rw} LINGK. ${input.lingkungan}`,
+      };
+      const res = await addData(COLLECTION, cInput);
 
       if (res) {
         setNotif({
@@ -276,8 +260,6 @@ const Logic = () => {
   const onUbah = (e, data) => {
     e.stopPropagation(); // don't select this row after clicking
 
-    let index = constantKecamatan.indexOf(data.kecamatan);
-    setIndexKecamatan(index);
     setInput(data);
     setOpen(true);
   };
@@ -312,7 +294,11 @@ const Logic = () => {
   const onSuccesConfirm = async () => {
     let massege;
     if (confirm.variant === "edit") {
-      await updateDataDoc(COLLECTION, input.id, input);
+      let cInput = {
+        ...input,
+        alamat: `${input.jalan} RT ${input.rt} RW ${input.rw} LINGK. ${input.lingkungan}`,
+      };
+      await updateDataDoc(COLLECTION, input.id, cInput);
       massege = "Data berhasil di ubah";
       handleClose();
     } else {
@@ -329,6 +315,7 @@ const Logic = () => {
   };
 
   const onCloseConfirm = () => {
+    handleClose();
     setConfirm({
       open: false,
       message: "",
@@ -357,7 +344,6 @@ const Logic = () => {
     value: {
       open,
       input,
-      indexKecamatan,
       notif,
       data,
       filterNik: inputFilter.filter_nik_kk,

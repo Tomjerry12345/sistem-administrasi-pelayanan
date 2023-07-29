@@ -2,32 +2,15 @@ import { useState } from "react";
 import { log } from "./Utilitas";
 
 const InputValidator = (input, x) => {
-  // const [notValid, setNotValid] = useState(() => {
-  //   let i = [];
-  //   // eslint-disable-next-line no-unused-vars
+  const [notValid, setNotValid] = useState(() =>
+    input !== null ? Array(input?.length ?? 0).fill(true) : Array(x).fill(true)
+  );
 
-  //   if (input !== null) {
-  //     // eslint-disable-next-line no-unused-vars
-  //     for (let _ in input) {
-  //       i.push(true);
-  //     }
-  //   } else {
-  //     for (let j = 0; j < x; j++) {
-  //       i.push(true);
-  //     }
-  //   }
-
-  //   return i;
-  // });
-
-  // const [notValid, setNotValid] = useState(() =>
-  //   input !== null ? Array(input?.length ?? 0).fill(true) : Array(x).fill(true)
-  // );
-
-  let notValid = input !== null ? Array(input?.length ?? 0).fill(true) : Array(x).fill(true);
-
-  log("test", "test");
-
+  const changeDefault = () => {
+    setNotValid(() =>
+      input !== null ? Array(input?.length ?? 0).fill(true) : Array(x).fill(true)
+    );
+  };
   const checkNotValid = (value, key) => {
     if (checkEmpty(value)) {
       return true;
@@ -43,27 +26,22 @@ const InputValidator = (input, x) => {
   const updateValid = (value, index, key) => {
     const current = [...notValid];
     current[index] = checkNotValid(value, key);
-    // setNotValid(current);
-    notValid = current;
+    setNotValid(current);
   };
 
   const setTofalseValue = (val) => {
-    // setNotValid(() => {
-    //   let i = [];
-    //   for (const key of Object.keys(val)) {
-    //     if (key !== "id" && key !== "bulan" && key !== "tahun") {
-    //       console.log(key, val[key]);
-    //       i.push(checkNotValid(val[key], key));
-    //     }
-    //   }
-    //   return i;
-    // });
+    let i = [];
+    for (const key of Object.keys(val)) {
+      if (key !== "id" && key !== "bulan" && key !== "tahun") {
+        i.push(checkNotValid(val[key], key));
+      }
+    }
+    log({ i });
+    setNotValid(i);
   };
 
   const checkNotValidAll = () => {
     let notValidAll = false;
-
-    console.log("notValid", notValid);
 
     notValid.forEach((value) => {
       if (value === true) {
@@ -101,6 +79,7 @@ const InputValidator = (input, x) => {
     updateValid,
     messageNotValid,
     setTofalseValue,
+    changeDefault,
   };
 };
 
