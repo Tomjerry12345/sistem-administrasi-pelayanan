@@ -9,6 +9,7 @@ const columns = [
   { field: "jenis_pengajuan", headerName: "Jenis Pengajuan", flex: 1 },
   { field: "tanggal_lahir", headerName: "Tanggal Lahir", flex: 1 },
   { field: "tempat_lahir", headerName: "Tempat Lahir", flex: 1 },
+  { field: "no_hp", headerName: "No HP", flex: 1 },
 ];
 
 const CekPermohonanPage = () => {

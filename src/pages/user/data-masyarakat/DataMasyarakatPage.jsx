@@ -20,8 +20,6 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import {
   constantBulan,
   constantJenisKelamin,
-  constantKecamatan,
-  constantKelurahan,
   constantHubunganKeluarga,
   constantStatusKawin,
   constantTahun,
@@ -51,6 +49,7 @@ const DataMasyarakatPage = () => {
       headerName: "Alamat Tempat Tinggal",
       width: 350,
     },
+    { field: "no_hp", headerName: "No HP", width: 150 },
     { field: "status_kawin", headerName: "Status Kawin", width: 150 },
     {
       field: "action",
@@ -244,6 +243,7 @@ const TambahData = ({ value, func }) => {
     jalan,
     rw,
     rt,
+    no_hp,
     status_kawin,
     nama_ayah,
     nama_ibu,
@@ -454,13 +454,25 @@ const TambahData = ({ value, func }) => {
             />
           </Stack>
 
+          <TextField
+              name="no_hp"
+              label="No HP"
+              type="number"
+              variant="outlined"
+              onChange={(e) => onChange(e, 13, "input")}
+              required
+              value={no_hp}
+              error={onError(no_hp)}
+              helperText={onHelperText(no_hp)}
+            />
+
           <FormControl className="custom-select" fullWidth>
             <InputLabel>Status Kawin</InputLabel>
             <Select
               name="status_kawin"
               label="Status Kawin"
               defaultValue=""
-              onChange={(e) => onChange(e, 13, "input")}
+              onChange={(e) => onChange(e, 14, "input")}
               required
               value={status_kawin}
               error={onError(status_kawin)}
@@ -481,7 +493,7 @@ const TambahData = ({ value, func }) => {
             label="Nama ayah"
             type="text"
             variant="outlined"
-            onChange={(e) => onChange(e, 14, "input")}
+            onChange={(e) => onChange(e, 15, "input")}
             required
             value={nama_ayah}
             error={onError(nama_ayah)}
@@ -493,7 +505,7 @@ const TambahData = ({ value, func }) => {
             label="Nama ibu"
             type="text"
             variant="outlined"
-            onChange={(e) => onChange(e, 15, "input")}
+            onChange={(e) => onChange(e, 16, "input")}
             required
             value={nama_ibu}
             error={onError(nama_ibu)}

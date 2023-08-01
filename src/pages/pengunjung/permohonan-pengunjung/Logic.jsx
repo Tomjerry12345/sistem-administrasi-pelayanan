@@ -6,6 +6,7 @@ const Logic = () => {
   const [input, setInput] = useState({
     nama: "",
     tempat_lahir: "",
+    no_hp: "",
     tanggal_lahir: "",
     jenis_pengajuan: "",
   });

@@ -11,6 +11,10 @@ export const setLocalItem = (key, value) => localStorage.setItem(key, value);
 
 export const getLocalItem = (key) => localStorage.getItem(key);
 
+export const setLocalObject = (key, value) => localStorage.setItem(key, JSON.stringify(value));
+
+export const getLocalObject = (key) => JSON.parse(localStorage.getItem(key));
+
 export const log = (v, m) => {
   if (m !== undefined) {
     console.log(`[d] ${v}`, m);

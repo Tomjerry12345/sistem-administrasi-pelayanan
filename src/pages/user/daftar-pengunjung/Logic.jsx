@@ -20,7 +20,9 @@ const Logic = () => {
     jalan: "",
     rw: "",
     rt: "",
+    no_hp: "",
     nama_petugas: "",
+    jenis_pengunjung: "",
     bulan: getMonthNow(),
     tahun: getYearNow(),
   });
@@ -53,7 +55,7 @@ const Logic = () => {
 
   const navigate = useNavigate();
 
-  const validator = InputValidator(null, 12);
+  const validator = InputValidator(null, 14);
 
   const { addData, getData, multipleSearching, deleteSpecifict, updateDataDoc } =
     FirebaseConfig();
@@ -102,18 +104,18 @@ const Logic = () => {
     snapshot.forEach((doc) => {
       const docData = doc.data();
       const kelengkapanBerkas = docData.kelengkapan_berkas;
-      const newKelengkapanBerkas = [];
+      // const newKelengkapanBerkas = [];
 
-      for (const i in kelengkapanBerkas) {
-        if (kelengkapanBerkas[i] === true) {
-          newKelengkapanBerkas.push(i);
-        }
-      }
+      // for (const i in kelengkapanBerkas) {
+      //   if (kelengkapanBerkas[i] === true) {
+      //     newKelengkapanBerkas.push(i);
+      //   }
+      // }
 
-      delete docData.kelengkapan_berkas;
+      // delete docData.kelengkapan_berkas;
       listData.push({
         ...docData,
-        kelengkapan_berkas: newKelengkapanBerkas.toString(),
+        // kelengkapan_berkas: newKelengkapanBerkas.toString(),
       });
     });
     setData(listData);
@@ -174,7 +176,9 @@ const Logic = () => {
         jalan: "",
         rw: "",
         rt: "",
+        no_hp: "",
         nama_petugas: "",
+        jenis_pengunjung: "",
         bulan: getMonthNow(),
         tahun: getYearNow(),
       });

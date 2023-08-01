@@ -19,7 +19,7 @@ import ModalNotif from "component/modal/ModalNotif";
 
 const PermohonanPengunjungPage = () => {
   const { value, func } = Logic();
-  const { nama, tempat_lahir, tanggal_lahir, jenis_pengajuan } = value.input;
+  const { nama, tempat_lahir, no_hp, tanggal_lahir, jenis_pengajuan } = value.input;
   const { open, variant, message } = value.notif;
   const { onChange, onChangeDate, onTambah, setNotif } = func;
   return (
@@ -48,11 +48,9 @@ const PermohonanPengunjungPage = () => {
             label="Nama"
             type="text"
             variant="outlined"
-            onChange={(e) => onChange(e, 0, "input")}
+            onChange={(e) => onChange(e)}
             required
             value={nama}
-            // error={onError(nama_petugas)}
-            // helperText={onHelperText(nama_petugas)}
             fullWidth
           />
           <TextField
@@ -60,11 +58,20 @@ const PermohonanPengunjungPage = () => {
             label="Tempat lahir"
             type="text"
             variant="outlined"
-            onChange={(e) => onChange(e, 0, "input")}
+            onChange={(e) => onChange(e)}
             required
             value={tempat_lahir}
-            // error={onError(nama_petugas)}
-            // helperText={onHelperText(nama_petugas)}
+            fullWidth
+          />
+
+          <TextField
+            name="no_hp"
+            label="No HP"
+            type="number"
+            variant="outlined"
+            onChange={(e) => onChange(e)}
+            required
+            value={no_hp}
             fullWidth
           />
 
