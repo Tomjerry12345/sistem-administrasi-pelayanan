@@ -6,10 +6,10 @@ import { log } from "values/Utilitas";
 const Logic = () => {
   const [input, setInput] = useState({
     nama: "",
-    tempat_lahir: "",
+    // tempat_lahir: "",
     no_hp: "",
     tanggal_lahir: "",
-    jenis_pengajuan: "",
+    jenis_layanan: "",
   });
 
   const [notif, setNotif] = useState({
@@ -22,7 +22,7 @@ const Logic = () => {
   const navigate = useNavigate();
 
   const COLLECTION = "cek-permohonan";
-  const COLLECTION_PENGUNJUNG = "pengunjung";
+  const COLLECTION_PENGUNJUNG = "daftar-pengunjung";
 
   const onChange = (e) => {
     const { name, value } = e.target;

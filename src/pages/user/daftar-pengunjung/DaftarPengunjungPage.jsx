@@ -235,7 +235,7 @@ const ShowData = ({ value, columns }) => (
       columns={columns}
       pageSize={5}
       rowsPerPageOptions={[5]}
-      getRowId={(row) => row["nik"]}
+      getRowId={(row) => row["id"]}
     />
   </div>
 );
@@ -266,7 +266,7 @@ const TambahData = ({ func, value }) => {
     rt,
     no_hp,
     nama_petugas,
-    jenis_pengunjung
+    jenis_pengunjung,
   } = input;
   return (
     <Dialog open={open} onClose={handleClose} className="custom-dialog-tambah-data">
@@ -458,7 +458,6 @@ const TambahData = ({ func, value }) => {
             type="text"
             variant="outlined"
             onChange={(e) => onChange(e, 12, "input")}
-            
             value={jenis_pengunjung}
             error={onError(jenis_pengunjung, "jenis_pengunjung")}
             helperText={onHelperText(jenis_pengunjung, "jenis_pengunjung")}

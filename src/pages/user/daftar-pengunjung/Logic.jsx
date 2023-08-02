@@ -103,7 +103,7 @@ const Logic = () => {
 
     snapshot.forEach((doc) => {
       const docData = doc.data();
-      const kelengkapanBerkas = docData.kelengkapan_berkas;
+      // const kelengkapanBerkas = docData.kelengkapan_berkas;
       // const newKelengkapanBerkas = [];
 
       // for (const i in kelengkapanBerkas) {

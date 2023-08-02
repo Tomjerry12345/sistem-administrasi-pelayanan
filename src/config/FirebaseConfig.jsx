@@ -14,19 +14,32 @@ import {
 } from "firebase/firestore";
 import { log, logS } from "../values/Utilitas";
 
+// main
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDC-xyB5g8iPgTzsuBQBaUACgptysAxFPA",
+//   authDomain: "sistem-administrasi-pelayanan.firebaseapp.com",
+//   projectId: "sistem-administrasi-pelayanan",
+//   storageBucket: "sistem-administrasi-pelayanan.appspot.com",
+//   messagingSenderId: "469648941370",
+//   appId: "1:469648941370:web:0a8445ee1642379321b003",
+//   measurementId: "G-W13F93GL0P"
+// };
+
+// testing
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDC-xyB5g8iPgTzsuBQBaUACgptysAxFPA",
-  authDomain: "sistem-administrasi-pelayanan.firebaseapp.com",
-  projectId: "sistem-administrasi-pelayanan",
-  storageBucket: "sistem-administrasi-pelayanan.appspot.com",
-  messagingSenderId: "469648941370",
-  appId: "1:469648941370:web:0a8445ee1642379321b003",
-  measurementId: "G-W13F93GL0P"
+  apiKey: "AIzaSyD3k2CQcdMWRZ1681bCejcOpY8hTWcWumQ",
+  authDomain: "sistem-pelayanan.firebaseapp.com",
+  projectId: "sistem-pelayanan",
+  storageBucket: "sistem-pelayanan.appspot.com",
+  messagingSenderId: "723332462456",
+  appId: "1:723332462456:web:e9b97768620d1c7c823a8d",
+  measurementId: "G-JGDNZSPHJS",
 };
 
 const FirebaseConfig = () => {
   const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
   const db = getFirestore(app);
 
   const addData = async (path, data) => {
@@ -103,8 +116,6 @@ const FirebaseConfig = () => {
     const listWhere = [];
 
     if (value !== "" && value !== undefined) {
-      log({ key });
-      log({ value });
       listWhere.push(where(key, "==", value));
     }
 
@@ -117,17 +128,14 @@ const FirebaseConfig = () => {
     }
 
     if (value3 !== "" && value3 !== undefined) {
-      listWhere.push(where(key3, "==", value3));
+      listWhere.push(where(key3, "==", parseInt(value3)));
     }
 
     if (value4 !== "" && value4 !== undefined) {
-      alert("value4");
       listWhere.push(where(key4, "==", value4));
     }
 
     const sum = listWhere.length;
-
-    log({ listWhere });
 
     let q;
 
