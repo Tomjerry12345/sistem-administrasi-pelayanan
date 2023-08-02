@@ -13,7 +13,7 @@ const RoutersConfig = () => {
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/permohonan-pengajuan" element={<PermohonanPengunjungPage />} />
+        <Route path="/ajukan-permohonan" element={<PermohonanPengunjungPage />} />
         <Route path="user" element={<MainUserPage />}>
           <Route index element={<CekPermohonanPage />} />
           <Route path="daftar-pengunjung" element={<DaftarPengunjungPage />} />

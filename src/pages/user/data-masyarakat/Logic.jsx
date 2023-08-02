@@ -23,6 +23,7 @@ const Logic = () => {
     jalan: "",
     rw: "",
     rt: "",
+    no_hp: "",
     status_kawin: "",
     nama_ayah: "",
     nama_ibu: "",
@@ -57,7 +58,7 @@ const Logic = () => {
 
   const navigate = useNavigate();
 
-  const validator = InputValidator(null, 14);
+  const validator = InputValidator(null, 15);
 
   const { addData, getData, multipleSearching, deleteSpecifict, updateDataDoc } =
     FirebaseConfig();
@@ -146,6 +147,7 @@ const Logic = () => {
         jalan: "",
         rw: "",
         rt: "",
+        no_hp: "",
         status_kawin: "",
         nama_ayah: "",
         nama_ibu: "",

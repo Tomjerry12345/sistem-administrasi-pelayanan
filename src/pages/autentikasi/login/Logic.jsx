@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FirebaseConfig from "config/FirebaseConfig";
 import InputValidator from "values/InputValidator";
+import { log, setLocalObject } from "values/Utilitas";
 
 const Logic = () => {
   let navigate = useNavigate();
@@ -54,13 +55,11 @@ const Logic = () => {
 
           if (input.username === data.username && input.password === data.password) {
             localStorage.setItem("auth", "user");
-            localStorage.setItem("move-page", "null");
-            localStorage.setItem("index-menu", "null");
+            setLocalObject("user", data)
             navigate("/user");
-          } else {
-            throw new Error("Username atau password salah");
-          }
+          } 
         });
+        throw new Error("Username atau password salah");
       } catch (e) {
         setNotif({
           open: true,

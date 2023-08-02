@@ -33,6 +33,7 @@ const DaftarPengunjungPage = () => {
   const { open, variant, message } = value.notif;
 
   const columns = [
+    { field: "jenis_pengunjung", headerName: "Jenis kunjungan", width: 150 },
     { field: "nik", headerName: "NIK", width: 160 },
     { field: "no_kk", headerName: "NoKK", width: 160 },
     { field: "nama", headerName: "Nama Pengunjung", width: 180 },
@@ -41,7 +42,7 @@ const DaftarPengunjungPage = () => {
     { field: "pendidikan", headerName: "Pendidikan", width: 150 },
     { field: "tanggal_lahir", headerName: "Tanggal Lahir", width: 150 },
     { field: "alamat", headerName: "Alamat", width: 350 },
-    { field: "nama_petugas", headerName: "Nama Petugas", width: 150 },
+    { field: "no_hp", headerName: "No Hp", width: 150 },
     {
       field: "action",
       headerName: "Aksi",
@@ -88,7 +89,8 @@ const DaftarPengunjungPage = () => {
           jalan: row.jalan,
           rw: row.rw,
           rt: row.rt,
-          nama_petugas: row.nama_petugas,
+          no_hp: row.no_hp,
+          jenis_pengunjung: row.jenis_pengunjung,
           id: row.id,
           bulan: row.bulan,
           tahun: row.tahun,
@@ -262,7 +264,9 @@ const TambahData = ({ func, value }) => {
     jalan,
     rw,
     rt,
+    no_hp,
     nama_petugas,
+    jenis_pengunjung
   } = input;
   return (
     <Dialog open={open} onClose={handleClose} className="custom-dialog-tambah-data">
@@ -437,15 +441,27 @@ const TambahData = ({ func, value }) => {
           </Stack>
 
           <TextField
-            name="nama_petugas"
-            label="Nama Petugas"
-            type="text"
+            name="no_hp"
+            label="No HP"
+            type="number"
             variant="outlined"
             onChange={(e) => onChange(e, 11, "input")}
             required
-            value={nama_petugas}
-            error={onError(nama_petugas)}
-            helperText={onHelperText(nama_petugas)}
+            value={no_hp}
+            error={onError(no_hp)}
+            helperText={onHelperText(no_hp)}
+          />
+
+          <TextField
+            name="jenis_pengunjung"
+            label="Jenis kunjungan"
+            type="text"
+            variant="outlined"
+            onChange={(e) => onChange(e, 12, "input")}
+            
+            value={jenis_pengunjung}
+            error={onError(jenis_pengunjung, "jenis_pengunjung")}
+            helperText={onHelperText(jenis_pengunjung, "jenis_pengunjung")}
           />
         </Box>
       </DialogContent>

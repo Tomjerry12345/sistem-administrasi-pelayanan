@@ -7,6 +7,7 @@ const AppBarLogic = () => {
   const onClickNav = (value) => {
     if (value === "logout") {
       setLocalItem("auth", "false");
+      localStorage.setItem("user", null);
       navigate("/");
     } else if (value === "kusioner") {
       navigate("kusioner");
