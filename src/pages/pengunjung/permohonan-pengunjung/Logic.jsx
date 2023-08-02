@@ -1,6 +1,7 @@
 import FirebaseConfig from "config/FirebaseConfig";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { log } from "values/Utilitas";
 
 const Logic = () => {
   const [input, setInput] = useState({
@@ -20,6 +21,7 @@ const Logic = () => {
   const navigate = useNavigate();
 
   const COLLECTION = "cek-permohonan";
+  const COLLECTION_PENGUNJUNG = "pengunjung";
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -39,28 +41,33 @@ const Logic = () => {
   };
 
   const onTambah = async () => {
-    setNotif({
-      open: true,
-      message: "Sedang di proses...",
-      variant: "progress",
-    });
-
-    const res = await addData(COLLECTION, input);
-
-    if (res) {
+    try {
       setNotif({
         open: true,
-        message: "Data berhasil di tambahkan",
-        variant: "success",
+        message: "Sedang di proses...",
+        variant: "progress",
       });
 
-      navigate(0);
-    } else
-      setNotif({
-        open: true,
-        message: "Data gagal di tambahkan",
-        variant: "error",
-      });
+      const res = await addData(COLLECTION, input);
+      await addData(COLLECTION_PENGUNJUNG, input);
+
+      if (res) {
+        setNotif({
+          open: true,
+          message: "Data berhasil di tambahkan",
+          variant: "success",
+        });
+
+        navigate(0);
+      } else
+        setNotif({
+          open: true,
+          message: "Data gagal di tambahkan",
+          variant: "error",
+        });
+    } catch (e) {
+      log({ e });
+    }
   };
 
   return {

@@ -108,7 +108,7 @@ const DataMasyarakatPage = () => {
       </Typography>
 
       <Stack sx={{ mb: 4, mt: 4 }} direction="row">
-        <FormControl sx={{ mr: 2, minWidth: 150 }}>
+        {/* <FormControl sx={{ mr: 2, minWidth: 150 }}>
           <InputLabel id="filter_kecamatan">Lingkungan</InputLabel>
           <Select
             name="filter_lingkungan"
@@ -157,7 +157,7 @@ const DataMasyarakatPage = () => {
               </MenuItem>
             ))}
           </Select>
-        </FormControl>
+        </FormControl> */}
 
         <Stack alignItems="flex-end" style={{ width: "100vw" }}>
           <TextField
