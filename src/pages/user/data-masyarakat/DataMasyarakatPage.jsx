@@ -107,8 +107,8 @@ const DataMasyarakatPage = () => {
       </Typography>
 
       <Stack sx={{ mb: 4, mt: 4 }} direction="row">
-        {/* <FormControl sx={{ mr: 2, minWidth: 150 }}>
-          <InputLabel id="filter_kecamatan">Lingkungan</InputLabel>
+        <FormControl sx={{ mr: 2, minWidth: 150 }}>
+          <InputLabel id="filter_lingkungan">Lingkungan</InputLabel>
           <Select
             name="filter_lingkungan"
             labelId="filter_lingkungan"
@@ -124,7 +124,7 @@ const DataMasyarakatPage = () => {
           </Select>
         </FormControl>
 
-        <FormControl sx={{ minWidth: 170, mr: 2 }}>
+        {/* <FormControl sx={{ minWidth: 170, mr: 2 }}>
           <InputLabel id="filter_bulan">Bulan</InputLabel>
           <Select
             name="filter_bulan"
@@ -455,16 +455,16 @@ const TambahData = ({ value, func }) => {
           </Stack>
 
           <TextField
-              name="no_hp"
-              label="No HP"
-              type="number"
-              variant="outlined"
-              onChange={(e) => onChange(e, 13, "input")}
-              required
-              value={no_hp}
-              error={onError(no_hp)}
-              helperText={onHelperText(no_hp)}
-            />
+            name="no_hp"
+            label="No HP"
+            type="number"
+            variant="outlined"
+            onChange={(e) => onChange(e, 13, "input")}
+            required
+            value={no_hp}
+            error={onError(no_hp)}
+            helperText={onHelperText(no_hp)}
+          />
 
           <FormControl className="custom-select" fullWidth>
             <InputLabel>Status Kawin</InputLabel>

@@ -114,7 +114,7 @@ const DaftarPengunjungPage = () => {
       <Typography variant="h5">Daftar Pengunjung</Typography>
 
       <Stack sx={{ mb: 4, mt: 4 }} direction="row">
-        <FormControl sx={{ mr: 2, minWidth: 150 }}>
+        {/* <FormControl sx={{ mr: 2, minWidth: 150 }}>
           <InputLabel id="filter_lingkungan">Lingkungan</InputLabel>
           <Select
             name="filter_lingkungan"
@@ -129,8 +129,8 @@ const DaftarPengunjungPage = () => {
               </MenuItem>
             ))}
           </Select>
-        </FormControl>
-        <FormControl sx={{ minWidth: 170, mr: 2 }}>
+        </FormControl> */}
+        {/* <FormControl sx={{ minWidth: 170, mr: 2 }}>
           <InputLabel id="filter_jenis_layanan">Jenis layanan</InputLabel>
           <Select
             name="filter_jenis_layanan"
@@ -145,8 +145,8 @@ const DaftarPengunjungPage = () => {
               </MenuItem>
             ))}
           </Select>
-        </FormControl>
-        <FormControl sx={{ minWidth: 170, mr: 2 }}>
+        </FormControl> */}
+        {/* <FormControl sx={{ minWidth: 170, mr: 2 }}>
           <InputLabel id="filter_bulan">Bulan</InputLabel>
           <Select
             name="filter_bulan"
@@ -161,7 +161,7 @@ const DaftarPengunjungPage = () => {
               </MenuItem>
             ))}
           </Select>
-        </FormControl>
+        </FormControl> */}
         <FormControl sx={{ minWidth: 170 }}>
           <InputLabel id="filter_tahun">Tahun</InputLabel>
           <Select
