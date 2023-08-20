@@ -271,7 +271,7 @@ const TambahData = ({ func, value }) => {
   return (
     <Dialog open={open} onClose={handleClose} className="custom-dialog-tambah-data">
       <Stack alignItems="center">
-        <DialogTitle>Tambah Data</DialogTitle>
+        <DialogTitle>{input.id === undefined ? "Tambah Data" : "Edit Data"}</DialogTitle>
       </Stack>
 
       <DialogContent

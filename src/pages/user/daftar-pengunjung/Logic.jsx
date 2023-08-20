@@ -55,7 +55,7 @@ const Logic = () => {
 
   const navigate = useNavigate();
 
-  const validator = InputValidator(null, 14);
+  const validator = InputValidator(null, 13);
 
   const { addData, getData, multipleSearching, deleteSpecifict, updateDataDoc } =
     FirebaseConfig();

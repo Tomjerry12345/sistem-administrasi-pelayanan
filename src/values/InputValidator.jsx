@@ -49,6 +49,8 @@ const InputValidator = (input, x) => {
       }
     });
 
+    log({ notValid });
+
     // const notValidAll = notValid.some((val) => val === false);
 
     return !notValidAll;
