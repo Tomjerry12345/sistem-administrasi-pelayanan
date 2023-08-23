@@ -16,27 +16,27 @@ import { log, logS } from "../values/Utilitas";
 
 // main
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyDC-xyB5g8iPgTzsuBQBaUACgptysAxFPA",
-//   authDomain: "sistem-administrasi-pelayanan.firebaseapp.com",
-//   projectId: "sistem-administrasi-pelayanan",
-//   storageBucket: "sistem-administrasi-pelayanan.appspot.com",
-//   messagingSenderId: "469648941370",
-//   appId: "1:469648941370:web:0a8445ee1642379321b003",
-//   measurementId: "G-W13F93GL0P"
-// };
+const firebaseConfig = {
+  apiKey: "AIzaSyDC-xyB5g8iPgTzsuBQBaUACgptysAxFPA",
+  authDomain: "sistem-administrasi-pelayanan.firebaseapp.com",
+  projectId: "sistem-administrasi-pelayanan",
+  storageBucket: "sistem-administrasi-pelayanan.appspot.com",
+  messagingSenderId: "469648941370",
+  appId: "1:469648941370:web:0a8445ee1642379321b003",
+  measurementId: "G-W13F93GL0P",
+};
 
 // testing
 
-const firebaseConfig = {
-  apiKey: "AIzaSyD3k2CQcdMWRZ1681bCejcOpY8hTWcWumQ",
-  authDomain: "sistem-pelayanan.firebaseapp.com",
-  projectId: "sistem-pelayanan",
-  storageBucket: "sistem-pelayanan.appspot.com",
-  messagingSenderId: "723332462456",
-  appId: "1:723332462456:web:e9b97768620d1c7c823a8d",
-  measurementId: "G-JGDNZSPHJS",
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyD3k2CQcdMWRZ1681bCejcOpY8hTWcWumQ",
+//   authDomain: "sistem-pelayanan.firebaseapp.com",
+//   projectId: "sistem-pelayanan",
+//   storageBucket: "sistem-pelayanan.appspot.com",
+//   messagingSenderId: "723332462456",
+//   appId: "1:723332462456:web:e9b97768620d1c7c823a8d",
+//   measurementId: "G-JGDNZSPHJS",
+// };
 
 const FirebaseConfig = () => {
   const app = initializeApp(firebaseConfig);

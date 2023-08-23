@@ -91,6 +91,30 @@ const Logic = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputFilter]);
 
+  // const handleFileUpload = (e) => {
+  //   const file = e.target.files[0];
+  //   const reader = new FileReader();
+
+  //   reader.onload = async (event) => {
+  //     const binaryData = event.target.result;
+  //     const workbook = XLSX.read(binaryData, { type: "binary" });
+  //     const sheetName = workbook.SheetNames[0];
+  //     const sheet = workbook.Sheets[sheetName];
+  //     const jsonData = XLSX.utils.sheet_to_json(sheet);
+
+  //     for (let d of jsonData) {
+  //       console.log("d", d);
+  //       const res = await addData(COLLECTION, d);
+  //       console.log("res", res);
+  //       console.log("=============");
+  //     }
+
+  //     // setData(jsonData);
+  //   };
+
+  //   reader.readAsBinaryString(file);
+  // };
+
   const getAllData = async () => {
     const snapshot = await getData(COLLECTION);
     let listData = [];
@@ -342,6 +366,7 @@ const Logic = () => {
       onSuccesConfirm,
       onCloseConfirm,
       onUbahDb,
+      // handleFileUpload,
     },
     value: {
       open,

@@ -69,6 +69,9 @@ const DataMasyarakatPage = () => {
           no_kk: row.no_kk,
           nik: row.nik,
           nama: row.nama,
+          nama_ayah: row.nama_ayah,
+          nama_ibu: row.nama_ibu,
+          no_hp: row.no_hp,
           jenis_kelamin: row.jenis_kelamin,
           tempat_lahir: row.tempat_lahir,
           tanggal_lahir: row.tanggal_lahir,
@@ -105,6 +108,8 @@ const DataMasyarakatPage = () => {
       <Typography variant="h5" sx={{ mb: 4 }}>
         Data Masyarakat
       </Typography>
+
+      {/* <input type="file" onChange={func.handleFileUpload} /> */}
 
       <Stack sx={{ mb: 4, mt: 4 }} direction="row">
         <FormControl sx={{ mr: 2, minWidth: 150 }}>
